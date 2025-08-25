@@ -40,9 +40,9 @@ class ZaddyAPITester:
         print()
 
     def test_root_api(self):
-        """Test GET /api/ - Root API health check"""
+        """Test GET /api - Root API health check"""
         try:
-            response = self.session.get(f"{self.base_url}/")
+            response = self.session.get(f"{self.base_url}")
             
             if response.status_code == 200:
                 data = response.json()
