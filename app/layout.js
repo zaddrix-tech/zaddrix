@@ -1,15 +1,23 @@
 import './globals.css'
+import { ThemeProvider } from '@/components/theme-provider'
 
 export const metadata = {
-  title: 'Next.js MongoDB Template',
-  description: 'A simple template with App Router, MongoDB, and shadcn/ui',
+  title: 'Zaddy - Premium AI Skills Training Platform',
+  description: 'Learn AI-integrated skills and earn money from home with our progressive skill packages',
 }
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body>
-        {children}
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="dark"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   )

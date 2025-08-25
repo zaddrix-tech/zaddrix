@@ -1,104 +1,290 @@
-import { MongoClient } from 'mongodb'
-import { v4 as uuidv4 } from 'uuid'
 import { NextResponse } from 'next/server'
+import { MongoClient } from 'mongodb'
 
 // MongoDB connection
 let client
 let db
 
-async function connectToMongo() {
+async function connectToDatabase() {
   if (!client) {
     client = new MongoClient(process.env.MONGO_URL)
     await client.connect()
-    db = client.db(process.env.DB_NAME)
+    db = client.db(process.env.DB_NAME || 'zaddy_platform')
   }
   return db
 }
 
-// Helper function to handle CORS
-function handleCORS(response) {
-  response.headers.set('Access-Control-Allow-Origin', process.env.CORS_ORIGINS || '*')
-  response.headers.set('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
-  response.headers.set('Access-Control-Allow-Headers', 'Content-Type, Authorization')
-  response.headers.set('Access-Control-Allow-Credentials', 'true')
-  return response
-}
+// Mock data for demonstration
+const mockPackages = [
+  {
+    id: 'alpha',
+    name: 'Alpha',
+    title: 'E-commerce Fundamentals',
+    price: 2999,
+    originalPrice: 4999,
+    status: 'active',
+    features: [
+      'Product research & selection',
+      'Store setup & optimization',
+      'Marketing strategies',
+      'Order fulfillment basics',
+      'Customer service mastery'
+    ],
+    modules: [
+      {
+        id: 'module1',
+        title: 'E-commerce Introduction',
+        lessons: [
+          { id: 'lesson1', title: 'What is E-commerce?', duration: 1200, videoUrl: '/mock-video-1' },
+          { id: 'lesson2', title: 'Market Research Basics', duration: 1800, videoUrl: '/mock-video-2' }
+        ]
+      }
+    ]
+  },
+  {
+    id: 'beta',
+    name: 'Beta',
+    title: 'Alpha + AI Vibe Coding',
+    price: 4999,
+    originalPrice: 7999,
+    status: 'active',
+    features: [
+      'Everything in Alpha',
+      'AI-powered development',
+      'No-code/Low-code solutions',
+      'Automation workflows',
+      'Custom app building'
+    ]
+  },
+  {
+    id: 'gamma',
+    name: 'Gamma',
+    title: 'Complete Package + UGC',
+    price: 7999,
+    originalPrice: 12999,
+    status: 'active',
+    features: [
+      'Everything in Alpha + Beta',
+      'Instagram influencing',
+      'Video content creation',
+      'Personal brand building'
+    ]
+  }
+]
 
-// OPTIONS handler for CORS
-export async function OPTIONS() {
-  return handleCORS(new NextResponse(null, { status: 200 }))
-}
+const mockUsers = [
+  {
+    id: 'user1',
+    email: 'test@example.com',
+    name: 'John Doe',
+    activePackages: ['alpha'],
+    progress: {
+      alpha: {
+        completedLessons: ['lesson1'],
+        currentLesson: 'lesson2',
+        progressPercentage: 65
+      }
+    }
+  }
+]
 
-// Route handler function
-async function handleRoute(request, { params }) {
-  const { path = [] } = params
-  const route = `/${path.join('/')}`
-  const method = request.method
-
+// API Routes Handler
+export async function GET(request) {
+  const url = new URL(request.url)
+  const pathname = url.pathname.replace('/api', '')
+  
   try {
-    const db = await connectToMongo()
-
-    // Root endpoint - GET /api/root (since /api/ is not accessible with catch-all)
-    if (route === '/root' && method === 'GET') {
-      return handleCORS(NextResponse.json({ message: "Hello World" }))
-    }
-    // Root endpoint - GET /api/root (since /api/ is not accessible with catch-all)
-    if (route === '/' && method === 'GET') {
-      return handleCORS(NextResponse.json({ message: "Hello World" }))
+    // Root API endpoint
+    if (pathname === '/' || pathname === '') {
+      return NextResponse.json({ 
+        message: 'Zaddy Platform API is running!',
+        status: 'success',
+        timestamp: new Date().toISOString()
+      })
     }
 
-    // Status endpoints - POST /api/status
-    if (route === '/status' && method === 'POST') {
-      const body = await request.json()
+    // Get all packages
+    if (pathname === '/packages') {
+      return NextResponse.json({
+        success: true,
+        packages: mockPackages
+      })
+    }
+
+    // Get specific package
+    if (pathname.startsWith('/packages/')) {
+      const packageId = pathname.split('/')[2]
+      const package = mockPackages.find(p => p.id === packageId)
       
-      if (!body.client_name) {
-        return handleCORS(NextResponse.json(
-          { error: "client_name is required" }, 
-          { status: 400 }
-        ))
+      if (!package) {
+        return NextResponse.json({ error: 'Package not found' }, { status: 404 })
       }
-
-      const statusObj = {
-        id: uuidv4(),
-        client_name: body.client_name,
-        timestamp: new Date()
-      }
-
-      await db.collection('status_checks').insertOne(statusObj)
-      return handleCORS(NextResponse.json(statusObj))
-    }
-
-    // Status endpoints - GET /api/status
-    if (route === '/status' && method === 'GET') {
-      const statusChecks = await db.collection('status_checks')
-        .find({})
-        .limit(1000)
-        .toArray()
-
-      // Remove MongoDB's _id field from response
-      const cleanedStatusChecks = statusChecks.map(({ _id, ...rest }) => rest)
       
-      return handleCORS(NextResponse.json(cleanedStatusChecks))
+      return NextResponse.json({
+        success: true,
+        package
+      })
     }
 
-    // Route not found
-    return handleCORS(NextResponse.json(
-      { error: `Route ${route} not found` }, 
-      { status: 404 }
-    ))
+    // Get user profile
+    if (pathname === '/profile') {
+      const authHeader = request.headers.get('authorization')
+      // Mock authentication check
+      if (!authHeader) {
+        return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+      }
+      
+      return NextResponse.json({
+        success: true,
+        user: mockUsers[0]
+      })
+    }
 
+    // Get user progress
+    if (pathname === '/progress') {
+      return NextResponse.json({
+        success: true,
+        progress: mockUsers[0].progress
+      })
+    }
+
+    // Default 404 for unmatched routes
+    return NextResponse.json({ error: 'Route not found' }, { status: 404 })
+    
   } catch (error) {
     console.error('API Error:', error)
-    return handleCORS(NextResponse.json(
-      { error: "Internal server error" }, 
-      { status: 500 }
-    ))
+    return NextResponse.json({ 
+      error: 'Internal server error',
+      message: error.message 
+    }, { status: 500 })
   }
 }
 
-// Export all HTTP methods
-export const GET = handleRoute
-export const POST = handleRoute
-export const PUT = handleRoute
-export const DELETE = handleRoute
-export const PATCH = handleRoute
+export async function POST(request) {
+  const url = new URL(request.url)
+  const pathname = url.pathname.replace('/api', '')
+  
+  try {
+    const body = await request.json()
+
+    // Mock login endpoint
+    if (pathname === '/auth/login') {
+      const { email, password } = body
+      
+      // Mock authentication
+      if (email && password) {
+        const user = mockUsers.find(u => u.email === email)
+        if (user) {
+          return NextResponse.json({
+            success: true,
+            user,
+            token: 'mock-jwt-token-' + Date.now()
+          })
+        }
+      }
+      
+      return NextResponse.json({ error: 'Invalid credentials' }, { status: 401 })
+    }
+
+    // Mock registration endpoint
+    if (pathname === '/auth/register') {
+      const { email, name, phone, password } = body
+      
+      // Mock user creation
+      const newUser = {
+        id: 'user' + Date.now(),
+        email,
+        name,
+        phone,
+        activePackages: [],
+        progress: {}
+      }
+      
+      return NextResponse.json({
+        success: true,
+        user: newUser,
+        message: 'Registration successful'
+      })
+    }
+
+    // Mock purchase endpoint
+    if (pathname === '/purchase') {
+      const { packageId, paymentMethod } = body
+      
+      // Mock payment processing
+      const package = mockPackages.find(p => p.id === packageId)
+      if (!package) {
+        return NextResponse.json({ error: 'Package not found' }, { status: 404 })
+      }
+      
+      return NextResponse.json({
+        success: true,
+        orderId: 'order_' + Date.now(),
+        message: 'Purchase successful',
+        package
+      })
+    }
+
+    // Mock progress update
+    if (pathname === '/progress/update') {
+      const { lessonId, watchedDuration, completed } = body
+      
+      return NextResponse.json({
+        success: true,
+        message: 'Progress updated successfully'
+      })
+    }
+
+    return NextResponse.json({ error: 'Route not found' }, { status: 404 })
+    
+  } catch (error) {
+    console.error('API Error:', error)
+    return NextResponse.json({ 
+      error: 'Internal server error',
+      message: error.message 
+    }, { status: 500 })
+  }
+}
+
+export async function PUT(request) {
+  const url = new URL(request.url)
+  const pathname = url.pathname.replace('/api', '')
+  
+  try {
+    const body = await request.json()
+
+    // Mock profile update
+    if (pathname === '/profile') {
+      return NextResponse.json({
+        success: true,
+        message: 'Profile updated successfully'
+      })
+    }
+
+    return NextResponse.json({ error: 'Route not found' }, { status: 404 })
+    
+  } catch (error) {
+    console.error('API Error:', error)
+    return NextResponse.json({ 
+      error: 'Internal server error',
+      message: error.message 
+    }, { status: 500 })
+  }
+}
+
+export async function DELETE(request) {
+  const url = new URL(request.url)
+  const pathname = url.pathname.replace('/api', '')
+  
+  try {
+    // Mock delete operations can be added here
+    return NextResponse.json({ error: 'Route not found' }, { status: 404 })
+    
+  } catch (error) {
+    console.error('API Error:', error)
+    return NextResponse.json({ 
+      error: 'Internal server error',
+      message: error.message 
+    }, { status: 500 })
+  }
+}
