@@ -356,7 +356,7 @@ export default function ZaddyPlatform() {
           }}
         />
         <div className="container mx-auto text-center relative z-10">
-          <h1 className="text-6xl md:text-8xl font-bold mb-6">
+          <h1 className="text-6xl md:text-8xl font-bold mb-6 hero-text">
             <span className="neon-cyan">Learn</span>
             <span className="mx-4">•</span>
             <span className="neon-purple">Earn</span>
