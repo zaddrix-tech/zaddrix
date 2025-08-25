@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
@@ -26,6 +26,79 @@ import {
   Menu,
   X
 } from 'lucide-react'
+
+// Particle System Component
+const ParticleSystem = () => {
+  const [particles, setParticles] = useState([])
+
+  useEffect(() => {
+    const createParticle = () => ({
+      id: Math.random(),
+      left: Math.random() * 100,
+      size: Math.random() * 4 + 2,
+      duration: Math.random() * 10 + 15,
+      delay: Math.random() * 5
+    })
+
+    const initialParticles = Array.from({ length: 15 }, createParticle)
+    setParticles(initialParticles)
+
+    const interval = setInterval(() => {
+      setParticles(prev => [
+        ...prev.slice(-14),
+        createParticle()
+      ])
+    }, 3000)
+
+    return () => clearInterval(interval)
+  }, [])
+
+  return (
+    <div className="particles-bg">
+      {particles.map(particle => (
+        <div
+          key={particle.id}
+          className="particle"
+          style={{
+            left: `${particle.left}%`,
+            width: `${particle.size}px`,
+            height: `${particle.size}px`,
+            animationDuration: `${particle.duration}s`,
+            animationDelay: `${particle.delay}s`
+          }}
+        />
+      ))}
+    </div>
+  )
+}
+
+// Enhanced Floating Icons Component
+const FloatingIcons = () => {
+  const icons = [
+    { Icon: Crown, delay: 0, duration: 6 },
+    { Icon: Zap, delay: 2, duration: 8 },
+    { Icon: Trophy, delay: 4, duration: 7 },
+    { Icon: Star, delay: 1, duration: 9 }
+  ]
+
+  return (
+    <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      {icons.map(({ Icon, delay, duration }, index) => (
+        <div
+          key={index}
+          className="absolute opacity-20"
+          style={{
+            top: `${20 + (index * 15)}%`,
+            left: `${10 + (index * 20)}%`,
+            animation: `floating ${duration}s ease-in-out infinite`,
+            animationDelay: `${delay}s`
+          }}
+        >
+          <Icon className="h-12 w-12 text-cyan-400" />
+        </div>
+      ))}
+    </div>
+  )
 
 // Mock Data
 const packages = [
