@@ -114,15 +114,15 @@ export async function GET(request) {
     // Get specific package
     if (pathname.startsWith('/packages/')) {
       const packageId = pathname.split('/')[2]
-      const package = mockPackages.find(p => p.id === packageId)
+      const packageData = mockPackages.find(p => p.id === packageId)
       
-      if (!package) {
+      if (!packageData) {
         return NextResponse.json({ error: 'Package not found' }, { status: 404 })
       }
       
       return NextResponse.json({
         success: true,
-        package
+        package: packageData
       })
     }
 
