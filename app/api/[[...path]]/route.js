@@ -212,8 +212,8 @@ export async function POST(request) {
       const { packageId, paymentMethod } = body
       
       // Mock payment processing
-      const package = mockPackages.find(p => p.id === packageId)
-      if (!package) {
+      const packageData = mockPackages.find(p => p.id === packageId)
+      if (!packageData) {
         return NextResponse.json({ error: 'Package not found' }, { status: 404 })
       }
       
@@ -221,7 +221,7 @@ export async function POST(request) {
         success: true,
         orderId: 'order_' + Date.now(),
         message: 'Purchase successful',
-        package
+        package: packageData
       })
     }
 
