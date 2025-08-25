@@ -327,21 +327,23 @@ export default function ZaddyPlatform() {
     )
   }
 
-  // Package Card Component
+  // Package Card Component with Enhanced Animations
   const PackageCard = ({ pkg, isDetailed = false }) => (
-    <Card className={`glass-card ${pkg.status === 'coming-soon' ? 'opacity-60' : ''} ${isDetailed ? 'w-full' : ''}`}>
+    <Card className={`glass-card hover-lift tilt-card ${pkg.status === 'coming-soon' ? 'opacity-60' : ''} ${isDetailed ? 'w-full' : ''}`}>
       <CardHeader className="text-center">
         <div className="flex justify-center mb-4">
           {pkg.image ? (
-            <img src={pkg.image} alt={pkg.title} className="w-20 h-20 rounded-2xl object-cover" />
+            <div className="floating">
+              <img src={pkg.image} alt={pkg.title} className="w-20 h-20 rounded-2xl object-cover" />
+            </div>
           ) : (
-            <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-cyan-400 to-purple-400 flex items-center justify-center">
+            <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-cyan-400 to-purple-400 flex items-center justify-center floating-delayed">
               <Lock className="h-10 w-10 text-white" />
             </div>
           )}
         </div>
         <div className="flex justify-center mb-2">
-          <Badge className={`${pkg.name.toLowerCase() === 'alpha' ? 'bg-green-500' : pkg.name.toLowerCase() === 'beta' ? 'bg-blue-500' : pkg.name.toLowerCase() === 'gamma' ? 'bg-purple-500' : 'bg-gray-500'}`}>
+          <Badge className={`${pkg.name.toLowerCase() === 'alpha' ? 'bg-green-500 pulse-glow' : pkg.name.toLowerCase() === 'beta' ? 'bg-blue-500 pulse-glow' : pkg.name.toLowerCase() === 'gamma' ? 'bg-purple-500 pulse-glow' : 'bg-gray-500'} transition-all duration-300`}>
             {pkg.name}
           </Badge>
         </div>
@@ -349,9 +351,9 @@ export default function ZaddyPlatform() {
         <CardDescription>
           {typeof pkg.price === 'number' ? (
             <div className="space-y-2">
-              <div className="text-3xl font-bold neon-purple">₹{pkg.price.toLocaleString()}</div>
+              <div className="text-3xl font-bold neon-purple">{pkg.price.toLocaleString()}</div>
               {pkg.originalPrice && (
-                <div className="text-sm text-muted-foreground line-through">₹{pkg.originalPrice.toLocaleString()}</div>
+                <div className="text-sm text-muted-foreground line-through">{pkg.originalPrice.toLocaleString()}</div>
               )}
             </div>
           ) : (
@@ -362,15 +364,15 @@ export default function ZaddyPlatform() {
       <CardContent>
         <div className="space-y-4">
           <div className="grid grid-cols-3 gap-4 text-center text-sm">
-            <div>
+            <div className="hover-lift">
               <BookOpen className="h-4 w-4 mx-auto mb-1" />
               <div>{pkg.modules} Modules</div>
             </div>
-            <div>
+            <div className="hover-lift">
               <Video className="h-4 w-4 mx-auto mb-1" />
               <div>{pkg.lessons} Lessons</div>
             </div>
-            <div>
+            <div className="hover-lift">
               <Trophy className="h-4 w-4 mx-auto mb-1" />
               <div>{pkg.duration}</div>
             </div>
@@ -378,7 +380,7 @@ export default function ZaddyPlatform() {
           
           <div className="space-y-2">
             {pkg.features.map((feature, index) => (
-              <div key={index} className="flex items-center space-x-2">
+              <div key={index} className="flex items-center space-x-2 fade-in-up revealed hover-lift" style={{animationDelay: `${index * 0.1}s`}}>
                 <CheckCircle className="h-4 w-4 text-green-500" />
                 <span className="text-sm">{feature}</span>
               </div>
@@ -389,7 +391,7 @@ export default function ZaddyPlatform() {
             {pkg.status === 'active' ? (
               <>
                 <Button 
-                  className="w-full neon-border-cyan rounded-full"
+                  className="w-full neon-border-cyan rounded-full btn-animated magnetic"
                   onClick={() => {
                     setSelectedPackage(pkg)
                     setCurrentView('package-detail')
@@ -399,15 +401,15 @@ export default function ZaddyPlatform() {
                 </Button>
                 {!isDetailed && (
                   <Button 
-                    className="w-full neon-border-purple rounded-full"
+                    className="w-full neon-border-purple rounded-full btn-animated magnetic"
                     onClick={() => alert('Mock purchase - would integrate Razorpay here')}
                   >
-                    Buy Now ₹{pkg.price.toLocaleString()}
+                    Buy Now {pkg.price.toLocaleString()}
                   </Button>
                 )}
               </>
             ) : (
-              <Button disabled className="w-full">
+              <Button disabled className="w-full rounded-full">
                 Coming Soon
               </Button>
             )}
