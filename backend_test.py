@@ -11,7 +11,7 @@ import os
 from datetime import datetime
 
 # Get base URL from environment
-BASE_URL = "https://skillzaddy.preview.emergentagent.com/api"
+BASE_URL = "http://localhost:3000/api"
 
 class ZaddyAPITester:
     def __init__(self):
