@@ -485,7 +485,7 @@ export default function ZaddyPlatform() {
                 <Card className="glass-card hover-lift">
                   <CardHeader>
                     <div className="flex items-center space-x-4">
-                      <Avatar className="floating">
+                      <Avatar>
                         <AvatarImage src={testimonial.avatar} />
                         <AvatarFallback>{testimonial.name.charAt(0)}</AvatarFallback>
                       </Avatar>
@@ -498,7 +498,7 @@ export default function ZaddyPlatform() {
                   <CardContent>
                     <div className="flex mb-2">
                       {Array.from({ length: testimonial.rating }).map((_, i) => (
-                        <Star key={i} className="h-4 w-4 fill-yellow-400 text-yellow-400 floating" style={{animationDelay: `${i * 0.1}s`}} />
+                        <Star key={i} className="h-4 w-4 fill-yellow-400 text-yellow-400" />
                       ))}
                     </div>
                     <p className="text-sm mb-4">{testimonial.content}</p>
