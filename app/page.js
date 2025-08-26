@@ -310,7 +310,7 @@ export default function ZaddyPlatform() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required 
-            className="rounded-full"
+            className="rounded-3xl"
           />
         </div>
         <div>
