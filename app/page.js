@@ -664,7 +664,7 @@ export default function ZaddyPlatform() {
               </CardHeader>
               <CardContent>
                 <p className="text-sm mb-4">Ready for AI coding? Upgrade to Beta package and save ₹1000!</p>
-                <Button className="w-full neon-border-cyan btn-animated magnetic rounded-full">
+                <Button className="w-full neon-border-cyan btn-animated magnetic rounded-3xl">
                   Upgrade to Beta
                 </Button>
               </CardContent>
