@@ -350,11 +350,11 @@ export default function ZaddyPlatform() {
             {pkg.name}
           </Badge>
         </div>
-        <CardTitle className="neon-cyan">{pkg.title}</CardTitle>
+        <CardTitle className="text-foreground">{pkg.title}</CardTitle>
         <CardDescription>
           {typeof pkg.price === 'number' ? (
             <div className="space-y-2">
-              <div className="text-3xl font-bold neon-purple">₹{pkg.price.toLocaleString()}</div>
+              <div className="text-3xl font-bold text-foreground">₹{pkg.price.toLocaleString()}</div>
               {pkg.originalPrice && (
                 <div className="text-sm text-muted-foreground line-through">₹{pkg.originalPrice.toLocaleString()}</div>
               )}
