@@ -412,7 +412,7 @@ export default function ZaddyPlatform() {
                 )}
               </>
             ) : (
-              <Button disabled className="w-full rounded-full">
+              <Button disabled className="w-full rounded-3xl">
                 Coming Soon
               </Button>
             )}
