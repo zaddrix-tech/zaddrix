@@ -394,7 +394,7 @@ export default function ZaddyPlatform() {
             {pkg.status === 'active' ? (
               <>
                 <Button 
-                  className="w-full neon-border-cyan rounded-full btn-animated magnetic"
+                  className="w-full neon-border-cyan rounded-3xl btn-animated magnetic"
                   onClick={() => {
                     setSelectedPackage(pkg)
                     setCurrentView('package-detail')
@@ -404,7 +404,7 @@ export default function ZaddyPlatform() {
                 </Button>
                 {!isDetailed && (
                   <Button 
-                    className="w-full neon-border-purple rounded-full btn-animated magnetic"
+                    className="w-full neon-border-purple rounded-3xl btn-animated magnetic"
                     onClick={() => alert('Mock purchase - would integrate Razorpay here')}
                   >
                     Buy Now ₹{pkg.price.toLocaleString()}
