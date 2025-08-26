@@ -510,6 +510,57 @@ export default function ZaddyPlatform() {
           </div>
         </div>
       </section>
+
+      {/* About Section */}
+      <section className="py-20">
+        <div className="container mx-auto max-w-4xl">
+          <div className="text-center mb-12 fade-in-up revealed">
+            <h2 className="text-4xl font-bold mb-4 neon-cyan">About Zaddy</h2>
+            <p className="text-xl text-muted-foreground">Empowering the next generation of digital entrepreneurs</p>
+          </div>
+          
+          <Card className="glass-card mb-8 hover-lift fade-in-up revealed">
+            <CardContent className="p-8">
+              <h3 className="text-3xl font-bold mb-6 neon-purple">Our Mission</h3>
+              <p className="text-lg leading-relaxed mb-6">
+                At Zaddy, we believe everyone deserves the opportunity to build a profitable online business from home. 
+                Our mission is to democratize access to cutting-edge AI tools and proven business strategies, 
+                enabling anyone to achieve financial freedom through digital entrepreneurship.
+              </p>
+              <p className="text-lg leading-relaxed">
+                We've helped over 10,000+ students generate millions in combined revenue through our progressive 
+                learning system that takes you from complete beginner to advanced AI-powered entrepreneur.
+              </p>
+            </CardContent>
+          </Card>
+          
+          <div className="grid md:grid-cols-3 gap-8">
+            <Card className="glass-card text-center hover-lift tilt-card fade-in-up revealed" style={{animationDelay: '0.1s'}}>
+              <CardContent className="p-6">
+                <Users className="h-12 w-12 mx-auto mb-4 neon-cyan floating" />
+                <h4 className="text-2xl font-bold mb-2">10,000+</h4>
+                <p className="text-muted-foreground">Students Trained</p>
+              </CardContent>
+            </Card>
+            
+            <Card className="glass-card text-center hover-lift tilt-card fade-in-up revealed" style={{animationDelay: '0.2s'}}>
+              <CardContent className="p-6">
+                <Trophy className="h-12 w-12 mx-auto mb-4 neon-purple floating-delayed" />
+                <h4 className="text-2xl font-bold mb-2">₹50CR+</h4>
+                <p className="text-muted-foreground">Student Revenue Generated</p>
+              </CardContent>
+            </Card>
+            
+            <Card className="glass-card text-center hover-lift tilt-card fade-in-up revealed" style={{animationDelay: '0.3s'}}>
+              <CardContent className="p-6">
+                <Star className="h-12 w-12 mx-auto mb-4 text-yellow-500 floating" />
+                <h4 className="text-2xl font-bold mb-2">4.9/5</h4>
+                <p className="text-muted-foreground">Average Rating</p>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
     </div>
   )
 
