@@ -555,7 +555,7 @@ export default function ZaddyPlatform() {
               <div className="space-y-4">
                 <Button 
                   size="lg" 
-                  className="w-full neon-border-purple text-lg btn-animated magnetic rounded-full"
+                  className="w-full neon-border-purple text-lg btn-animated magnetic rounded-3xl"
                   onClick={() => alert('Mock purchase flow - would integrate Razorpay here')}
                 >
                   <Crown className="mr-2 h-5 w-5" />
