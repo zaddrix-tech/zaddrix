@@ -324,8 +324,8 @@ export default function ZaddyPlatform() {
             className="rounded-full"
           />
         </div>
-        <Button type="submit" className="w-full neon-border-cyan rounded-full btn-animated">Login</Button>
-        <Button type="button" variant="outline" className="w-full rounded-full btn-animated">Continue with Google</Button>
+        <Button type="submit" className="w-full neon-border-cyan rounded-3xl btn-animated">Login</Button>
+        <Button type="button" variant="outline" className="w-full rounded-3xl btn-animated">Continue with Google</Button>
       </form>
     )
   }
