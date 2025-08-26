@@ -259,7 +259,7 @@ export default function ZaddyPlatform() {
           ) : (
             <Dialog>
               <DialogTrigger asChild>
-                <Button className="neon-border-cyan rounded-full btn-animated">Login</Button>
+                <Button className="neon-border-cyan rounded-3xl btn-animated">Login</Button>
               </DialogTrigger>
               <DialogContent className="glass-card">
                 <DialogHeader>
