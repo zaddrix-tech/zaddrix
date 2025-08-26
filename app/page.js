@@ -449,11 +449,11 @@ export default function ZaddyPlatform() {
             Join thousands earning ₹50K+ monthly with our premium training programs.
           </p>
           <div className="flex flex-col md:flex-row gap-4 justify-center">
-            <Button size="lg" className="neon-border-cyan text-lg px-8 rounded-full btn-animated magnetic" onClick={() => setCurrentView('packages')}>
+            <Button size="lg" className="neon-border-cyan text-lg px-8 rounded-3xl btn-animated magnetic" onClick={() => setCurrentView('packages')}>
               <Zap className="mr-2 h-5 w-5" />
               Explore Packages
             </Button>
-            <Button size="lg" variant="outline" className="text-lg px-8 rounded-full btn-animated" onClick={() => setCurrentView('reviews')}>
+            <Button size="lg" variant="outline" className="text-lg px-8 rounded-3xl btn-animated" onClick={() => setCurrentView('reviews')}>
               <Users className="mr-2 h-5 w-5" />
               Success Stories
             </Button>
