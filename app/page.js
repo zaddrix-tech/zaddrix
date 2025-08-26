@@ -321,7 +321,7 @@ export default function ZaddyPlatform() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required 
-            className="rounded-full"
+            className="rounded-3xl"
           />
         </div>
         <Button type="submit" className="w-full neon-border-cyan rounded-3xl btn-animated">Login</Button>
