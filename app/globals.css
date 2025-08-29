@@ -95,7 +95,7 @@
 }
 
 .glass-nav {
-  @apply bg-white/5 backdrop-blur-md border-b border-white/10 rounded-3xl;
+  @apply bg-white/5 backdrop-blur-md border-b border-white/10 rounded-full;
   transition: all 0.3s ease;
 }
 
@@ -331,6 +331,35 @@
 .hover-lift:hover {
   transform: translateY(-5px);
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+}
+
+/* Utility: disable hover/transform/animated effects for specific elements (eg. dialog) */
+.no-hover {
+  transition: none !important;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+.no-hover:hover {
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+/* Ensure child elements that normally animate on hover are also inert inside .no-hover */
+.no-hover .glass-card,
+.no-hover .hover-lift,
+.no-hover .btn-animated,
+.no-hover .tilt-card,
+.no-hover .pulse-glow {
+  transition: none !important;
+  transform: none !important;
+  box-shadow: none !important;
+  animation: none !important;
+}
+
+.no-hover .btn-animated::before {
+  left: -100% !important;
+  transition: none !important;
 }
 
 .neon-border-cyan {

@@ -26,6 +26,7 @@ import {
   Menu,
   X
 } from 'lucide-react'
+import Navigation from '@/components/Navigation' // <--- moved Navigation here
 
 // Particle System Component
 const ParticleSystem = () => {
@@ -187,36 +188,35 @@ const packages = [
 
 const testimonials = [
   {
-    name: 'Priya Sharma',
+    name: 'Dr Aatif',
     avatar: '/api/placeholder/40/40',
-    role: 'E-commerce Entrepreneur',
-    content: 'Alpha package helped me build a ₹50,000/month dropshipping business in just 3 months!',
+    role: 'MBBS Student, Malegaon',
+    content: 'I am an MBBS student from Malegaon, Maharashtra. I recently joined Zaddrix and was truly impressed with their system. The owner provides 24/7 support, and the team feels more like a family than just a company. Thank you, Zaddrix!',
     rating: 5,
-    earnings: '₹50K/month'
+    earnings: '8000/week'
   },
   {
-    name: 'Raj Patel',
+    name: 'Dr Muhib',
     avatar: '/api/placeholder/40/40',
-    role: 'AI Developer',
-    content: 'Beta package is incredible! I\'m now building custom apps for clients using AI tools.',
+    role: 'BDS Student, Dhule',
+    content: 'I am a BDS student from Dhule and joined Zaddrix just 10 days ago. The system here is amazing within my first week itself, I earned over ₹10,000. Thank you, Zaddrix.',
     rating: 5,
-    earnings: '₹1.2L/month'
+    earnings: '₹10,000/week'
   },
   {
-    name: 'Anita Kumar',
+    name: 'Mansor',
     avatar: '/api/placeholder/40/40',
-    role: 'Content Creator',
-    content: 'Gamma package transformed my Instagram. Now earning through UGC and brand partnerships!',
+    role: 'Businessman, Malegaon',
+    content: 'I am Mansor from Malegaon, Maharashtra. Though I am a businessman, I trust Zaddrix even more than my own business. Its system and earning opportunities are truly amazing. Thank you to the Zaddrix founders!',
     rating: 5,
-    earnings: '₹80K/month'
+    earnings: '₹7,000/week'
   }
 ]
 
-export default function ZaddyPlatform() {
+export default function ZaddrixPlatform() {
   const [currentView, setCurrentView] = useState('home')
   const [selectedPackage, setSelectedPackage] = useState(null)
   const [user, setUser] = useState(null)
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   // Mock login function
   const mockLogin = (email, password) => {
@@ -229,66 +229,6 @@ export default function ZaddyPlatform() {
     })
     setCurrentView('dashboard')
   }
-
-  // Navigation Component with Enhanced Animations
-  const Navigation = () => (
-    <nav className="glass-nav fixed top-0 left-0 right-0 z-50 p-4">
-      <div className="container mx-auto flex justify-between items-center">
-        <div className="flex items-center space-x-2">
-          <Crown className="h-8 w-8 neon-cyan floating" />
-          <span className="text-2xl font-bold neon-cyan">Zaddy</span>
-        </div>
-        
-        <div className="hidden md:flex space-x-6">
-          <Button variant="ghost" className="hover-lift" onClick={() => setCurrentView('home')}>Home</Button>
-          <Button variant="ghost" className="hover-lift" onClick={() => setCurrentView('packages')}>Packages</Button>
-          <Button variant="ghost" className="hover-lift" onClick={() => setCurrentView('reviews')}>Reviews</Button>
-          <Button variant="ghost" className="hover-lift" onClick={() => setCurrentView('about')}>About</Button>
-        </div>
-
-        <div className="flex items-center space-x-4">
-          <ThemeToggle />
-          {user ? (
-            <div className="flex items-center space-x-2">
-              <Avatar className="floating">
-                <AvatarImage src={user.avatar} />
-                <AvatarFallback>{user.name.charAt(0)}</AvatarFallback>
-              </Avatar>
-              <Button className="btn-animated" onClick={() => setCurrentView('dashboard')}>Dashboard</Button>
-            </div>
-          ) : (
-            <Dialog>
-              <DialogTrigger asChild>
-                <Button className="neon-border-cyan rounded-3xl btn-animated">Login</Button>
-              </DialogTrigger>
-              <DialogContent className="glass-card">
-                <DialogHeader>
-                  <DialogTitle className="neon-cyan">Welcome Back</DialogTitle>
-                  <DialogDescription>Login to access your courses</DialogDescription>
-                </DialogHeader>
-                <LoginForm onLogin={mockLogin} />
-              </DialogContent>
-            </Dialog>
-          )}
-          
-          <Button variant="ghost" size="sm" className="md:hidden" onClick={() => setIsMenuOpen(!isMenuOpen)}>
-            {isMenuOpen ? <X /> : <Menu />}
-          </Button>
-        </div>
-      </div>
-      
-      {isMenuOpen && (
-        <div className="md:hidden mt-4 glass-card p-4">
-          <div className="flex flex-col space-y-2">
-            <Button variant="ghost" onClick={() => { setCurrentView('home'); setIsMenuOpen(false); }}>Home</Button>
-            <Button variant="ghost" onClick={() => { setCurrentView('packages'); setIsMenuOpen(false); }}>Packages</Button>
-            <Button variant="ghost" onClick={() => { setCurrentView('reviews'); setIsMenuOpen(false); }}>Reviews</Button>
-            <Button variant="ghost" onClick={() => { setCurrentView('about'); setIsMenuOpen(false); }}>About</Button>
-          </div>
-        </div>
-      )}
-    </nav>
-  )
 
   // Login Form Component
   const LoginForm = ({ onLogin }) => {
@@ -428,32 +368,53 @@ export default function ZaddyPlatform() {
       <ParticleSystem />
       
       {/* Hero Section */}
-      <section className="hero-bg min-h-screen flex items-center justify-center relative pt-20">
+      <section
+        className="hero-bg min-h-screen flex items-center justify-center relative pt-24 pb-12 px-4 md:px-8"
+        aria-label="Hero Section"
+      >
         <FloatingIcons />
-        <div 
+        <div
           className="absolute inset-0 bg-cover bg-center opacity-20"
           style={{
-            backgroundImage: 'url(https://images.unsplash.com/photo-1581090464777-f3220bbe1b8b?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzB8MHwxfHNlYXJjaHwyfHxBSSUyMHRlY2hub2xvZ3l8ZW58MHx8fGJsdWV8MTc1NjEwMDI1MHww&ixlib=rb-4.1.0&q=85)'
+            backgroundImage:
+              'url(https://images.unsplash.com/photo-1581090464777-f3220bbe1b8b?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzB8MHwxfHNlYXJjaHwyfHxBSSUyMHRlY2hub2xvZ3l8ZW58MHx8fGJsdWV8MTc1NjEwMDI1MHww&ixlib=rb-4.1.0&q=85)',
           }}
+          aria-hidden="true"
         />
-        <div className="container mx-auto text-center relative z-10">
-          <h1 className="text-6xl md:text-8xl font-bold mb-6 hero-text">
-            <span className="neon-cyan">Learn</span>
-            <span className="mx-4">•</span>
-            <span className="neon-purple">Earn</span>
-            <span className="mx-4">•</span>
-            <span className="neon-cyan">Grow</span>
+        <div className="container mx-auto text-center relative z-10 flex flex-col items-center justify-center">
+          <h1 className="font-bold mb-6 break-words w-full
+            text-4xl sm:text-5xl md:text-6xl lg:text-8xl
+            leading-tight md:leading-tight lg:leading-tight"
+          >
+            <span>Learn</span>
+            <span className="mx-2 md:mx-4">•</span>
+            <span>Earn</span>
+            <span className="mx-2 md:mx-4">•</span>
+            <span>Grow</span>
           </h1>
-          <p className="text-xl md:text-2xl mb-8 text-muted-foreground max-w-3xl mx-auto fade-in-up revealed">
-            Master AI-integrated skills and build profitable online businesses from home. 
+          <p className="text-base sm:text-lg md:text-xl lg:text-2xl mb-8 text-muted-foreground max-w-xl sm:max-w-2xl md:max-w-3xl mx-auto fade-in-up revealed">
+            Master AI-integrated skills and build profitable online businesses from home.
             Join thousands earning ₹50K+ monthly with our premium training programs.
           </p>
-          <div className="flex flex-col md:flex-row gap-4 justify-center">
-            <Button size="lg" className="neon-border-cyan text-lg px-8 rounded-3xl btn-animated magnetic" onClick={() => setCurrentView('packages')}>
+          <div className="flex flex-col gap-4 w-full max-w-xs sm:max-w-md md:max-w-lg mx-auto
+            md:flex-row md:justify-center md:items-center"
+          >
+            <Button
+              size="lg"
+              className="neon-border-cyan text-lg px-8 py-6 rounded-3xl btn-animated magnetic w-full md:w-auto"
+              onClick={() => setCurrentView('packages')}
+              aria-label="Explore Packages"
+            >
               <Zap className="mr-2 h-5 w-5" />
               Explore Packages
             </Button>
-            <Button size="lg" variant="outline" className="text-lg px-8 rounded-3xl btn-animated" onClick={() => setCurrentView('reviews')}>
+            <Button
+              size="lg"
+              variant="outline"
+              className="text-lg px-8 py-6 rounded-3xl btn-animated w-full md:w-auto"
+              onClick={() => setCurrentView('reviews')}
+              aria-label="Success Stories"
+            >
               <Users className="mr-2 h-5 w-5" />
               Success Stories
             </Button>
@@ -464,7 +425,7 @@ export default function ZaddyPlatform() {
       {/* Quick Package Preview with Enhanced Animations */}
       <section className="py-20">
         <div className="container mx-auto">
-          <h2 className="text-4xl font-bold text-center mb-12 neon-cyan fade-in-up revealed">Choose Your Path</h2>
+          <h2 className="text-4xl font-bold text-center mb-12 fade-in-up revealed">Choose Your Path</h2>
           <div className="grid md:grid-cols-3 gap-8">
             {packages.slice(0, 3).map((pkg, index) => (
               <div key={pkg.id} className="fade-in-up revealed" style={{animationDelay: `${index * 0.2}s`}}>
@@ -478,7 +439,7 @@ export default function ZaddyPlatform() {
       {/* Social Proof with Enhanced Effects */}
       <section className="py-20 bg-muted/20">
         <div className="container mx-auto text-center">
-          <h3 className="text-3xl font-bold mb-12 neon-purple fade-in-up revealed">Success Stories</h3>
+          <h3 className="text-3xl font-bold mb-12 fade-in-up revealed">Success Stories</h3>
           <div className="grid md:grid-cols-3 gap-8">
             {testimonials.map((testimonial, index) => (
               <div key={index} className="fade-in-up revealed" style={{animationDelay: `${index * 0.15}s`}}>
@@ -515,15 +476,15 @@ export default function ZaddyPlatform() {
       <section className="py-20">
         <div className="container mx-auto max-w-4xl">
           <div className="text-center mb-12 fade-in-up revealed">
-            <h2 className="text-4xl font-bold mb-4 neon-cyan">About Zaddy</h2>
+            <h2 className="text-4xl font-bold mb-4">About Zaddrix</h2>
             <p className="text-xl text-muted-foreground">Empowering the next generation of digital entrepreneurs</p>
           </div>
           
           <Card className="glass-card mb-8 hover-lift fade-in-up revealed">
             <CardContent className="p-8">
-              <h3 className="text-3xl font-bold mb-6 neon-purple">Our Mission</h3>
+              <h3 className="text-3xl font-bold mb-6">Our Mission</h3>
               <p className="text-lg leading-relaxed mb-6">
-                At Zaddy, we believe everyone deserves the opportunity to build a profitable online business from home. 
+                At Zaddrix, we believe everyone deserves the opportunity to build a profitable online business from home. 
                 Our mission is to democratize access to cutting-edge AI tools and proven business strategies, 
                 enabling anyone to achieve financial freedom through digital entrepreneurship.
               </p>
@@ -537,16 +498,16 @@ export default function ZaddyPlatform() {
           <div className="grid md:grid-cols-3 gap-8">
             <Card className="glass-card text-center hover-lift tilt-card fade-in-up revealed" style={{animationDelay: '0.1s'}}>
               <CardContent className="p-6">
-                <Users className="h-12 w-12 mx-auto mb-4 neon-cyan floating" />
-                <h4 className="text-2xl font-bold mb-2">10,000+</h4>
+                <Users className="h-12 w-12 mx-auto text-blue-500 mb-4 floating" />
+                <h3 className="text-2xl font-bold mb-2">100+</h3>
                 <p className="text-muted-foreground">Students Trained</p>
               </CardContent>
             </Card>
             
             <Card className="glass-card text-center hover-lift tilt-card fade-in-up revealed" style={{animationDelay: '0.2s'}}>
               <CardContent className="p-6">
-                <Trophy className="h-12 w-12 mx-auto mb-4 neon-purple floating-delayed" />
-                <h4 className="text-2xl font-bold mb-2">₹50CR+</h4>
+                <Trophy className="h-12 w-12 mx-auto mb-4 text-green-500 floating-delayed" />
+                <h3 className="text-2xl font-bold mb-2">₹10L+</h3>
                 <p className="text-muted-foreground">Student Revenue Generated</p>
               </CardContent>
             </Card>
@@ -554,7 +515,7 @@ export default function ZaddyPlatform() {
             <Card className="glass-card text-center hover-lift tilt-card fade-in-up revealed" style={{animationDelay: '0.3s'}}>
               <CardContent className="p-6">
                 <Star className="h-12 w-12 mx-auto mb-4 text-yellow-500 floating" />
-                <h4 className="text-2xl font-bold mb-2">4.9/5</h4>
+                <h3 className="text-2xl font-bold mb-2">4.9/5</h3>
                 <p className="text-muted-foreground">Average Rating</p>
               </CardContent>
             </Card>
@@ -695,11 +656,11 @@ export default function ZaddyPlatform() {
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="text-center hover-lift">
-                  <div className="text-3xl font-bold neon-cyan">16</div>
+                  <div className="text-3xl font-bold">16</div>
                   <p className="text-sm text-muted-foreground">Lessons Completed</p>
                 </div>
                 <div className="text-center hover-lift">
-                  <div className="text-3xl font-bold neon-purple">5.2h</div>
+                  <div className="text-3xl font-bold">5.2h</div>
                   <p className="text-sm text-muted-foreground">Watch Time</p>
                 </div>
                 <div className="text-center hover-lift">
@@ -715,7 +676,7 @@ export default function ZaddyPlatform() {
               </CardHeader>
               <CardContent>
                 <p className="text-sm mb-4">Ready for AI coding? Upgrade to Beta package and save ₹1000!</p>
-                <Button className="w-full neon-border-cyan btn-animated magnetic rounded-3xl">
+                <Button className="w-full btn-animated magnetic rounded-3xl">
                   Upgrade to Beta
                 </Button>
               </CardContent>
@@ -802,7 +763,7 @@ export default function ZaddyPlatform() {
     <div className="min-h-screen pt-20 py-8">
       <div className="container mx-auto">
         <div className="text-center mb-12 fade-in-up revealed">
-          <h1 className="text-5xl font-bold mb-4 neon-cyan">Choose Your Package</h1>
+          <h1 className="text-5xl font-bold mb-4">Choose Your Package</h1>
           <p className="text-xl text-muted-foreground">Progressive learning paths designed for maximum earning potential</p>
         </div>
         
@@ -822,7 +783,7 @@ export default function ZaddyPlatform() {
     <div className="min-h-screen pt-20 py-8">
       <div className="container mx-auto">
         <div className="text-center mb-12 fade-in-up revealed">
-          <h1 className="text-5xl font-bold mb-4 neon-purple">Success Stories</h1>
+          <h1 className="text-5xl font-bold mb-4">Success Stories</h1>
           <p className="text-xl text-muted-foreground">Real results from real students</p>
         </div>
         
@@ -849,7 +810,7 @@ export default function ZaddyPlatform() {
                     ))}
                   </div>
                   <p className="mb-4">{testimonial.content}</p>
-                  <Badge className="neon-border-cyan pulse-glow">{testimonial.earnings}</Badge>
+                  <Badge className="pulse-glow">{testimonial.earnings}</Badge>
                 </CardContent>
               </Card>
             </div>
@@ -864,15 +825,15 @@ export default function ZaddyPlatform() {
     <div className="min-h-screen pt-20 py-8">
       <div className="container mx-auto max-w-4xl">
         <div className="text-center mb-12 fade-in-up revealed">
-          <h1 className="text-5xl font-bold mb-4 neon-cyan">About Zaddy</h1>
+          <h1 className="text-5xl font-bold mb-4">About Zaddrix</h1>
           <p className="text-xl text-muted-foreground">Empowering the next generation of digital entrepreneurs</p>
         </div>
         
         <Card className="glass-card mb-8 hover-lift fade-in-up revealed">
           <CardContent className="p-8">
-            <h2 className="text-3xl font-bold mb-6 neon-purple">Our Mission</h2>
+            <h2 className="text-3xl font-bold mb-6">Our Mission</h2>
             <p className="text-lg leading-relaxed mb-6">
-              At Zaddy, we believe everyone deserves the opportunity to build a profitable online business from home. 
+              At Zaddrix, we believe everyone deserves the opportunity to build a profitable online business from home. 
               Our mission is to democratize access to cutting-edge AI tools and proven business strategies, 
               enabling anyone to achieve financial freedom through digital entrepreneurship.
             </p>
@@ -886,7 +847,7 @@ export default function ZaddyPlatform() {
         <div className="grid md:grid-cols-3 gap-8">
           <Card className="glass-card text-center hover-lift tilt-card fade-in-up revealed" style={{animationDelay: '0.1s'}}>
             <CardContent className="p-6">
-              <Users className="h-12 w-12 mx-auto mb-4 neon-cyan floating" />
+              <Users className="h-12 w-12 mx-auto mb-4 floating" />
               <h3 className="text-2xl font-bold mb-2">10,000+</h3>
               <p className="text-muted-foreground">Students Trained</p>
             </CardContent>
@@ -894,7 +855,7 @@ export default function ZaddyPlatform() {
           
           <Card className="glass-card text-center hover-lift tilt-card fade-in-up revealed" style={{animationDelay: '0.2s'}}>
             <CardContent className="p-6">
-              <Trophy className="h-12 w-12 mx-auto mb-4 neon-purple floating-delayed" />
+              <Trophy className="h-12 w-12 mx-auto mb-4 floating-delayed" />
               <h3 className="text-2xl font-bold mb-2">₹50CR+</h3>
               <p className="text-muted-foreground">Student Revenue Generated</p>
             </CardContent>
@@ -912,9 +873,10 @@ export default function ZaddyPlatform() {
     </div>
   )
 
+  // Only render the views, Navigation/Footer will be in layout.js
   return (
     <div className="min-h-screen">
-      <Navigation />
+      <Navigation setCurrentView={setCurrentView} onLogin={mockLogin} user={user} />
       
       {currentView === 'home' && <HomeView />}
       {currentView === 'packages' && <PackagesView />}
