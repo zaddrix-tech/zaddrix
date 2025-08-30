@@ -108,8 +108,8 @@ const packages = [
     id: 'alpha',
     name: 'Alpha',
     title: 'E-commerce Fundamentals',
-    price: 2999,
-    originalPrice: 4999,
+    price: 5999,
+    originalPrice: 8999,
     status: 'active',
     image: 'https://images.unsplash.com/photo-1563986768609-322da13575f3?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzF8MHwxfHNlYXJjaHwxfHxvbmxpbmUlMjBidXNpbmVzc3xlbnwwfHx8fDE3NTYxMDAyNzl8MA&ixlib=rb-4.1.0&q=85',
     features: [
@@ -127,8 +127,8 @@ const packages = [
     id: 'beta',
     name: 'Beta',
     title: 'Alpha + AI Vibe Coding',
-    price: 4999,
-    originalPrice: 7999,
+    price: 7999,
+    originalPrice: 9999,
     status: 'active',
     image: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NjZ8MHwxfHNlYXJjaHwxfHxjb2Rpbmd8ZW58MHx8fHwxNzU2MTAwMjg0fDA&ixlib=rb-4.1.0&q=85',
     features: [
@@ -147,7 +147,7 @@ const packages = [
     id: 'gamma',
     name: 'Gamma',
     title: 'Complete Package + UGC',
-    price: 7999,
+    price: 9999,
     originalPrice: 12999,
     status: 'active',
     image: 'https://images.unsplash.com/photo-1726066012749-f81bf4422d4e?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzF8MHwxfHNlYXJjaHwxfHxjb250ZW50JTIwY3JlYXRpb258ZW58MHx8fHwxNzU2MTAwMjg5fDA&ixlib=rb-4.1.0&q=85',
@@ -204,7 +204,7 @@ const testimonials = [
     earnings: '₹10,000/week'
   },
   {
-    name: 'Mansor',
+    name: 'Mr Mansor',
     avatar: '/api/placeholder/40/40',
     role: 'Businessman, Malegaon',
     content: 'I am Mansor from Malegaon, Maharashtra. Though I am a businessman, I trust Zaddrix even more than my own business. Its system and earning opportunities are truly amazing. Thank you to the Zaddrix founders!',
