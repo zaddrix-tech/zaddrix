@@ -82,7 +82,7 @@ export default function Navigation({ setCurrentView, onLogin, user }) {
             </div>
           ) : (
             <Button className="neon-border-cyan rounded-3xl" asChild>
-              <a href="/api/auth/signin?provider=google">Login</a>
+              <h1>Login</h1>
             </Button>
           )}
           <Button variant="ghost" size="sm" className="md:hidden" onClick={() => setIsMenuOpen(!isMenuOpen)}>
